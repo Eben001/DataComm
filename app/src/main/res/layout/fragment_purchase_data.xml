@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipe_refresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            tools:context=".ui.dataSubscription.PurchaseDataFragment">
+
+
+            <TextView
+                android:id="@+id/tv_data_plan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textAppearance="?textAppearanceHeadline5"
+                tools:text="@string/text_select_sme_plan" />
+
+            <Spinner
+
+                android:id="@+id/data_plan_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/dropdownListPreferredItemHeight"
+                android:layout_marginTop="10dp"
+
+
+                android:background="@drawable/spinner_bg"
+                android:dropDownWidth="wrap_content"
+                android:dropDownVerticalOffset="?attr/dropdownListPreferredItemHeight"
+                android:popupBackground="@android:color/white"
+                android:popupElevation="3dp"
+
+                android:scrollbars="vertical"
+                android:splitMotionEvents="false"
+                android:stateListAnimator="@drawable/spinner_sla"
+                android:theme="@style/data_plan_spinner"
+                android:verticalScrollbarPosition="defaultPosition" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/text_phone_number"
+                android:textAppearance="?textAppearanceHeadline5" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phone_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/phone_req">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="number" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:id="@+id/tv_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:textAlignment="center"
+                android:textAppearance="?textAppearanceHeadline6"
+                android:visibility="invisible"
+                tools:text="Transaction Successful"
+                tools:visibility="visible" />
+
+            <Button
+                android:id="@+id/top_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:text="@string/topup_data"
+                android:textSize="25sp" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

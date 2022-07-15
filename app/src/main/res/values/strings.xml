@@ -1,0 +1,99 @@
+<resources>
+    <string name="app_name">DataComm</string>
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="airtel">airtel_airtime</string>
+    <string name="glo">glo_airtime</string>
+    <string name="_9mobile">9mobile_airtime</string>
+    <string name="mtn">mtn_airtime</string>
+
+    <string name="text_select_sme_plan">Select MTN SME Data Plan</string>
+    <string name="text_select_mtn_cg_plan">Select MTN Corporate Gifting Data Plan</string>
+    <string name="text_select_glo_plan">Select Glo Data Plan</string>
+    <string name="text_select_airtel_plan">Select Airtel Data Plan</string>
+
+
+    <string name="mtn_sme">mtn_sme_data</string>
+    <string name="mtn_gifting">mtn_gifting_data</string>
+    <string name="glo_data">glo_data</string>
+    <string name="nine_mobile_data">9mobile_data</string>
+    <string name="airtel_data">airtel_data</string>
+
+    <string name="text_airtel_airtime">Airtel Airtime</string>
+    <string name="text_mtn_airtime">MTN Airtime</string>
+    <string name="text_9mobile_airtime">9mobile Airtime</string>
+    <string name="text_glo_airtime">Glo Airtime</string>
+
+    <string-array name="MTN_SME">
+        <item>500MB @NGN 130</item>
+        <item>1GB @NGN 224</item>
+        <item>2GB @NGN 448</item>
+        <item>5GB @NGN 1130</item>
+        <item>10GB@NGN 2270</item>
+    </string-array>
+
+    <string-array name="MTN_GIFTING">
+        <item>50MB @NGN 30</item>
+        <item>500MB @NGN 140</item>
+        <item>1GB @NGN 250</item>
+        <item>2GB @NGN 500</item>
+        <item>5GB @NGN 1250</item>
+        <item>10GB@NGN 2500</item>
+    </string-array>
+
+    <string-array name="GLO">
+        <item>1 @NGN 470[30 DAYS]</item>
+        <item>2.9GB @NGN 940[30 DAYS]</item>
+        <item>4.1GB @NGN 1400[30 DAYS]</item>
+        <item>5.8GB @NGN 1850[30 DAYS]</item>
+        <item>7.7GB@NGN 2290[30 DAYS]</item>
+        <item>10GB @NGN 2790[30 DAYS]</item>
+    </string-array>
+
+    <string-array name="AIRTEL">
+        <item>100MB @NGN 65[7 DAYS]</item>
+        <item>300MB @NGN 120[7 DAYS]</item>
+        <item>500MB @NGN 160[7 DAYS]</item>
+        <item>1GB @NGN 300[30 DAYS]</item>
+        <item>2GB @NGN 600[30 DAYS]</item>
+        <item>5GB @NGN 1600[30 DAYS]</item>
+    </string-array>
+
+    <string name="question_what_would_you_like_to_purchase">What would you like to purchase?</string>
+    <string name="buy_airtime">Airtime</string>
+    <string name="buy_data">Data</string>
+
+    <string name="airtel_logo">Airtel LOGO</string>
+    <string name="glo_logo">GLO logo</string>
+    <string name="mtn_logo">MTN logo</string>
+    <string name="_9mobile_logo">9Mobile Logo</string>
+    <string name="text_network">Network</string>
+    <string name="minimum_amount_req">Minimum is N100 <font color='#FF0000'>*</font></string>
+    <string name="phone_req">Phone Number <font color='#FF0000'>*</font></string>
+
+    <string name="text_amount_to_recharge">Amount to Recharge</string>
+    <string name="text_phone_number">Phone Number</string>
+    <string name="recharge">Recharge</string>
+    <string name="topup_data">Topup Data</string>
+    <string name="account_balance">Account Balance</string>
+    <string name="txt_mtn_sme_data">MTN SME DATA</string>
+    <string name="txt_mtn_cooperate_gifting">MTN Cooperate Gifting</string>
+    <string name="text_glo_data">GLO DATA</string>
+    <string name="text_airtel_data">AIRTEL DATA</string>
+    <string name="err_msg_enter_amount">Please Enter an Amount</string>
+    <string name="err_msg_enter_phone">Please Enter a phone number</string>
+    <string name="balance">₦ %.2f</string>
+    <string name="greeting_morning">Hi there, Good Morning</string>
+    <string name="greeting_afternoon">Hi there, Good Afternoon</string>
+    <string name="greeting_evening">Hi there, Good Evening</string>
+    <string name="error_fetching_balance">Unable to Fetch Balance, Please try again</string>
+    <string name="error_purchasing_airtime">Failed! Please try again</string>
+    <string name="error_purchasing_data">Failed! Please try again</string>
+
+    <string name="err_http_error">Something went wrong, Please try again</string>
+    <string name="err_check_internet_connection">Please check your internet connection and try again</string>
+    <string name="err_unable_to_load_balance">Unable to reload balance. check your internet connection and retry</string>
+    <string name="general_exception">Something went wrong, Please try again</string>
+
+</resources>

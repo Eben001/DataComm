@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/startFragment">
+
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.ebenezer.gana.datacomm.ui.start.StartFragment"
+        android:label="Data Comm"
+        tools:layout="@layout/fragment_start">
+        <action
+            android:id="@+id/action_startFragment_to_airtimeFragment"
+            app:destination="@id/airtimeFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_dataTopupFragment"
+            app:destination="@id/dataTopupFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/airtimeFragment"
+        android:name="com.ebenezer.gana.datacomm.ui.airtime.AirtimeFragment"
+        android:label="Select Airtime"
+        tools:layout="@layout/fragment_airtime">
+        <action
+            android:id="@+id/action_airtimeFragment_to_purchaseAirtimeFragment"
+            app:destination="@id/purchaseAirtimeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dataTopupFragment"
+        android:name="com.ebenezer.gana.datacomm.ui.dataSubscription.DataTopupFragment"
+        android:label="Select Data"
+        tools:layout="@layout/fragment_data_topup">
+        <action
+            android:id="@+id/action_dataTopupFragment_to_purchaseDataFragment"
+            app:destination="@id/purchaseDataFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/purchaseAirtimeFragment"
+        android:name="com.ebenezer.gana.datacomm.ui.airtime.PurchaseAirtimeFragment"
+        android:label="Purchase Airtime"
+        tools:layout="@layout/fragment_purchase_airtime">
+        <argument
+            android:name="airtime_type"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/purchaseDataFragment"
+        android:name="com.ebenezer.gana.datacomm.ui.dataSubscription.PurchaseDataFragment"
+        android:label="Purchase Data"
+        tools:layout="@layout/fragment_purchase_data">
+        <argument
+            android:name="data_type"
+            app:argType="string" />
+    </fragment>
+</navigation>
