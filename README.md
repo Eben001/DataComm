@@ -1,6 +1,5 @@
 # DataComm
 An app for purchasing Airtime and Data subscription at a cheaper price 
-# Project Name
 
 ## Table of Contents
 * [General Info](#general-information)
@@ -15,11 +14,8 @@ An app for purchasing Airtime and Data subscription at a cheaper price
 * [Contact](#contact)
 <!-- * [License](#license) -->
 
-
 ## General Information
 - Buy airtime and mobile internet data at a more cheapter price with this android application
-
-
 ## Technologies Used
 - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
@@ -34,8 +30,7 @@ An app for purchasing Airtime and Data subscription at a cheaper price
 - Buy Data
 - Swipe to refresh
 - Network error handling
-
-
+- 
 ## Screenshots
 ![Untitled design](https://user-images.githubusercontent.com/54691862/179222246-868c65ea-09e7-4487-b55e-ef2c42ced082.png)
 
@@ -58,11 +53,6 @@ To do:
 - Implement dependency injection for injecting dependencies
 - Implemnet Kotlin Flows for Asynchronous streams
 
-
 ## Acknowledgements
-
 - This project was inspired when i visited [paytev.com](https://paytev.com) and discovered that they have an API. 
 I decided to build this application with it
-
-<!-- ## License -->
-<!-- This project is open source and available under the [... License](). -->
