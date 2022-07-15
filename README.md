@@ -37,9 +37,7 @@ An app for purchasing Airtime and Data subscription at a cheaper price
 
 
 ## Screenshots
-![Example screenshot](./img/screenshot.png)
-<!-- If you have screenshots you'd like to share, include them here. -->
-
+![Example screenshot]![Untitled design](https://user-images.githubusercontent.com/54691862/179222246-868c65ea-09e7-4487-b55e-ef2c42ced082.png)
 
 ## Setup
 To setup the project, go to [paytev.com](https://client.paytev.com/customer/login?next=/customer/) and create an account
