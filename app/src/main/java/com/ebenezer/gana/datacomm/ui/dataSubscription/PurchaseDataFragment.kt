@@ -12,7 +12,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.ebenezer.gana.datacomm.R
 import com.ebenezer.gana.datacomm.databinding.FragmentPurchaseDataBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PurchaseDataFragment : Fragment() {
 
     private var _binding: FragmentPurchaseDataBinding? = null

@@ -8,8 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ebenezer.gana.datacomm.R
 import com.ebenezer.gana.datacomm.databinding.FragmentAirtimeBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class AirtimeFragment : Fragment() {
 
     private var _binding: FragmentAirtimeBinding? = null

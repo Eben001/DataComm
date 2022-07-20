@@ -10,8 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.ebenezer.gana.datacomm.R
 import com.ebenezer.gana.datacomm.databinding.FragmentPurchaseAirtimeBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class PurchaseAirtimeFragment : Fragment() {
 
     private var _binding: FragmentPurchaseAirtimeBinding? = null
