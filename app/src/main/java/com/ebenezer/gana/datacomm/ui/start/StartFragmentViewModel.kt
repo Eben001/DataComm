@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.ebenezer.gana.datacomm.R
 import com.ebenezer.gana.datacomm.data.model.Failure
 import com.ebenezer.gana.datacomm.data.model.Success
-import com.ebenezer.gana.datacomm.data.model.repository.PayTevRepository
+import com.ebenezer.gana.datacomm.data.repository.PayTevRepository
 import com.ebenezer.gana.datacomm.utils.UiText
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

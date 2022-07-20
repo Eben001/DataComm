@@ -18,7 +18,6 @@ import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
-private const val TAG = "StartFragment"
 @AndroidEntryPoint
 class StartFragment : Fragment() {
     private var _binding: FragmentStartBinding? = null

@@ -1,4 +1,4 @@
-package com.ebenezer.gana.datacomm.data.model.repository
+package com.ebenezer.gana.datacomm.data.repository
 
 import com.ebenezer.gana.datacomm.data.model.Result
 
