@@ -48,8 +48,7 @@ PAYTEV_API_KEY = YOUR_API_KEY_HERE
 Project is: _in progress_ 
 
 To do:
-- Implement dependency injection for injecting dependencies
-- Implemnet Kotlin Flows for Asynchronous streams
+- Implement Kotlin Flows for Asynchronous streams
 
 ## Acknowledgements
 - This project was inspired when i visited [paytev.com](https://paytev.com) and discovered that they have an API. 
