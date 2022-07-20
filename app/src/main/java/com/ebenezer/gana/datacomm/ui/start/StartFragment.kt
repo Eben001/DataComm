@@ -13,22 +13,26 @@ import androidx.navigation.fragment.findNavController
 import com.ebenezer.gana.datacomm.R
 import com.ebenezer.gana.datacomm.databinding.FragmentStartBinding
 import com.ebenezer.gana.datacomm.prefsStore.UserPreference
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 
 private const val TAG = "StartFragment"
-
+@AndroidEntryPoint
 class StartFragment : Fragment() {
     private var _binding: FragmentStartBinding? = null
     private val binding get() = _binding!!
     private val viewModel: StartFragmentViewModel by viewModels()
-    private lateinit var userPreference: UserPreference
+
+    @Inject
+     lateinit var userPreference: UserPreference
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        userPreference = UserPreference(requireContext())
 
         // Inflate the layout for this fragment
         _binding = FragmentStartBinding.inflate(inflater, container, false)

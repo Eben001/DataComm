@@ -6,8 +6,9 @@ import com.ebenezer.gana.datacomm.data.model.Success
 import com.ebenezer.gana.datacomm.data.network.PaytevApi
 import retrofit2.HttpException
 import java.net.UnknownHostException
+import javax.inject.Inject
 
-class PayTevRepositoryImpl(private val paytevService: PaytevApi) : PayTevRepository {
+class PayTevRepositoryImpl @Inject constructor(private val paytevService: PaytevApi) : PayTevRepository {
 
     override suspend fun getBalance(): Result<Double> {
         return try {

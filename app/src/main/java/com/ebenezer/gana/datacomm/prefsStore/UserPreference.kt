@@ -4,11 +4,15 @@ import android.content.Context
 import androidx.datastore.preferences.core.doublePreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
+import javax.inject.Singleton
 
 private val Context.dataStore by preferencesDataStore(("balance"))
-class UserPreference(private val context:Context) {
+@Singleton
+class UserPreference @Inject constructor(@ApplicationContext val context:Context) {
 
 
     val dataBalance:Flow<Double?>

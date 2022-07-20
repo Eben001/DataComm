@@ -1,16 +1,12 @@
 package com.ebenezer.gana.datacomm.data.network
 
-import com.ebenezer.gana.datacomm.BuildConfig
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+/*
 
-
+*/
 /**
  * Builds retrofit dependencies.
- */
+ *//*
+
 
 private const val HEADER_AUTHORIZATION = "Authorization"
 private const val BASE_URL = "https://client.paytev.com/api/v1/"
@@ -56,4 +52,4 @@ private fun buildRetrofit(): Retrofit {
 }
 
 fun buildApiService(): PaytevApi =
-    buildRetrofit().create(PaytevApi::class.java)
+    buildRetrofit().create(PaytevApi::class.java)*/

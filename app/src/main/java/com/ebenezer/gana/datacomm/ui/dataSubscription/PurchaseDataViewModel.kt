@@ -4,19 +4,24 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ebenezer.gana.datacomm.App.Companion.repository
 import com.ebenezer.gana.datacomm.R
 import com.ebenezer.gana.datacomm.data.model.Failure
 import com.ebenezer.gana.datacomm.data.model.Success
+import com.ebenezer.gana.datacomm.data.model.repository.PayTevRepository
 import com.ebenezer.gana.datacomm.data.model.request.DataRequest
 import com.ebenezer.gana.datacomm.utils.UiText
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.net.UnknownHostException
+import javax.inject.Inject
 
-class PurchaseDataViewModel : ViewModel() {
+@HiltViewModel
+class PurchaseDataViewModel @Inject constructor(
+    private val repository:PayTevRepository
+) : ViewModel() {
 
     private val _result = MutableLiveData<UiText>()
     val result: LiveData<UiText> = _result
