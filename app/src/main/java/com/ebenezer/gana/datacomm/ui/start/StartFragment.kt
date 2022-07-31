@@ -27,7 +27,6 @@ class StartFragment : Fragment() {
     @Inject
      lateinit var userPreference: UserPreference
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,12 +43,10 @@ class StartFragment : Fragment() {
         observeViewModels()
         setGreetingMessage(Calendar.getInstance().get(Calendar.HOUR_OF_DAY))
         setOnClickListeners()
-
     }
 
     private fun setGreetingMessage(hourOfDay: Int) {
         viewModel.setGreetingMessage(hourOfDay)
-
     }
 
     private fun observeError() {
@@ -58,7 +55,6 @@ class StartFragment : Fragment() {
                 .show()
             binding.swipeRefresh.isRefreshing = false
         }
-
     }
 
     private fun setOnClickListeners() {
@@ -75,10 +71,7 @@ class StartFragment : Fragment() {
                 viewModel.getBalance()
                 observeError()
                 binding.swipeRefresh.isRefreshing = true
-
-
             }
-
         }
     }
 
@@ -90,10 +83,7 @@ class StartFragment : Fragment() {
                     userPreference.saveDataBalance(it)
                 }
                 binding.swipeRefresh.isRefreshing = false
-
             }
-
-
         }
 
         //Observe and display balance from dataStore preference
@@ -119,12 +109,8 @@ class StartFragment : Fragment() {
             }
         }
     }
-
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
-
-
 }

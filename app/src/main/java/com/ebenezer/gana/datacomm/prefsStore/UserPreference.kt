@@ -14,12 +14,10 @@ private val Context.dataStore by preferencesDataStore(("balance"))
 @Singleton
 class UserPreference @Inject constructor(@ApplicationContext val context:Context) {
 
-
     val dataBalance:Flow<Double?>
     get() = context.dataStore.data.map {preferences ->
         preferences[BALANCE_KEY]
     }
-
     suspend fun saveDataBalance(balance:Double){
         context.dataStore.edit {preferences ->
             preferences[BALANCE_KEY] = balance

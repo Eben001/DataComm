@@ -22,7 +22,6 @@ interface PaytevApi {
 
     ): AirtimeResponse
 
-
     @GET("data?format=json")
     suspend fun buyData(
         @Query("network") network: String?,

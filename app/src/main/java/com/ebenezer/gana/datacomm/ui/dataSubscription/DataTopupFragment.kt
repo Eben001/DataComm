@@ -12,8 +12,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DataTopupFragment : Fragment() {
-
-
     private var _binding:FragmentDataTopupBinding? = null
     private val binding get() = _binding!!
 

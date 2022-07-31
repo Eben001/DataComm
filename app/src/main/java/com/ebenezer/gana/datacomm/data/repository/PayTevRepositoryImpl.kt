@@ -49,6 +49,4 @@ class PayTevRepositoryImpl @Inject constructor(private val paytevService: Paytev
             Failure(error)
         }
     }
-
-
 }

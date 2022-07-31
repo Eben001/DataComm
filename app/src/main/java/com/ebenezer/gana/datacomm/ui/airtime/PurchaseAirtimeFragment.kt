@@ -68,10 +68,7 @@ class PurchaseAirtimeFragment : Fragment() {
             }
 
         }
-
-
     }
-
 
     private fun clearTextEntries() {
         binding.etPhoneNumber.text?.clear()
@@ -109,8 +106,6 @@ class PurchaseAirtimeFragment : Fragment() {
             phone = binding.etPhoneNumber.text.toString(),
             amount = binding.etAmount.text.toString()
         )
-
-
     }
 
     /**
@@ -138,7 +133,6 @@ class PurchaseAirtimeFragment : Fragment() {
         }
 
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

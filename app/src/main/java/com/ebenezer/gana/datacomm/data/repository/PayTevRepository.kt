@@ -8,5 +8,4 @@ interface PayTevRepository {
     suspend fun buyAirtime(network: String?, phoneNumber: String?, amount: String?): Result<String>
     suspend fun buyData(network: String?, phoneNumber: String?, amount: String?): Result<String>
 
-
 }

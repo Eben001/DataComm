@@ -19,7 +19,6 @@ object NetworkingModule {
     private const val HEADER_AUTHORIZATION = "Authorization"
     private const val BASE_URL = "https://client.paytev.com/api/v1/"
 
-
     @Provides
     fun provideFactory(): Converter.Factory{
         return GsonConverterFactory.create()
@@ -34,7 +33,6 @@ object NetworkingModule {
             .addInterceptor(interceptor)
             .addInterceptor(buildQueryParameterInterceptor())
             .build()
-
 
     fun buildQueryParameterInterceptor() = Interceptor { chain ->
         val originalRequest = chain.request()
@@ -57,7 +55,6 @@ object NetworkingModule {
             .build()
         chain.proceed(newRequest)
     }
-
 
     @Provides
     fun buildRetrofit(client: OkHttpClient, factory:Converter.Factory): Retrofit {
