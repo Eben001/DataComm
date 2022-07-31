@@ -44,37 +44,6 @@ class StartFragment : Fragment() {
         setGreetingMessage(Calendar.getInstance().get(Calendar.HOUR_OF_DAY))
         setOnClickListeners()
     }
-
-    private fun setGreetingMessage(hourOfDay: Int) {
-        viewModel.setGreetingMessage(hourOfDay)
-    }
-
-    private fun observeError() {
-        viewModel.error.observe(viewLifecycleOwner) { message ->
-            Toast.makeText(requireContext(), message.asString(requireContext()), Toast.LENGTH_SHORT)
-                .show()
-            binding.swipeRefresh.isRefreshing = false
-        }
-    }
-
-    private fun setOnClickListeners() {
-        binding.buyAirtime.setOnClickListener {
-            findNavController().navigate(R.id.action_startFragment_to_airtimeFragment)
-        }
-
-        binding.buyData.setOnClickListener {
-            findNavController().navigate(R.id.action_startFragment_to_dataTopupFragment)
-        }
-
-        binding.swipeRefresh.setOnRefreshListener {
-            lifecycleScope.launch {
-                viewModel.getBalance()
-                observeError()
-                binding.swipeRefresh.isRefreshing = true
-            }
-        }
-    }
-
     private fun observeViewModels() {
         //Observe and save the user's balance in preferenceStore
         viewModel.balance.observe(viewLifecycleOwner) { balance ->
@@ -99,6 +68,38 @@ class StartFragment : Fragment() {
 
     }
 
+
+    private fun setGreetingMessage(hourOfDay: Int) {
+        viewModel.setGreetingMessage(hourOfDay)
+    }
+
+    private fun setOnClickListeners() {
+        binding.buyAirtime.setOnClickListener {
+            findNavController().navigate(R.id.action_startFragment_to_airtimeFragment)
+        }
+
+        binding.buyData.setOnClickListener {
+            findNavController().navigate(R.id.action_startFragment_to_dataTopupFragment)
+        }
+
+        binding.swipeRefresh.setOnRefreshListener {
+            lifecycleScope.launch {
+                viewModel.getBalance()
+                observeError()
+                binding.swipeRefresh.isRefreshing = true
+            }
+        }
+    }
+
+
+    private fun observeError() {
+        viewModel.error.observe(viewLifecycleOwner) { message ->
+            Toast.makeText(requireContext(), message.asString(requireContext()), Toast.LENGTH_SHORT)
+                .show()
+            binding.swipeRefresh.isRefreshing = false
+        }
+    }
+
     override fun onStart() {
         super.onStart()
         if (viewModel.isBalanceLoaded.value == false) {
@@ -109,6 +110,7 @@ class StartFragment : Fragment() {
             }
         }
     }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
