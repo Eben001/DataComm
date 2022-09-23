@@ -1,7 +1,5 @@
 package com.ebenezer.gana.datacomm.ui.airtime
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ebenezer.gana.datacomm.R
@@ -12,6 +10,9 @@ import com.ebenezer.gana.datacomm.data.repository.PayTevRepository
 import com.ebenezer.gana.datacomm.utils.UiText
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
@@ -23,8 +24,8 @@ class PurchaseAirtimeViewModel @Inject constructor(
     private val repository: PayTevRepository
 ) : ViewModel() {
 
-    private val _result = MutableLiveData<UiText>()
-    val result: LiveData<UiText> = _result
+    private val _resultSharedFlow = MutableSharedFlow<UiText?>()
+    val resultSharedFlow: SharedFlow<UiText?> = _resultSharedFlow.asSharedFlow()
 
     /**
      * A function to buy the Actual Airtime from the network
@@ -37,32 +38,41 @@ class PurchaseAirtimeViewModel @Inject constructor(
     private fun buyNewAirtime(newAirtimeRequest: AirtimeRequest) = try {
         viewModelScope.launch(Dispatchers.IO) {
             when (val result =
-                repository.buyAirtime(newAirtimeRequest.network, newAirtimeRequest.phone, newAirtimeRequest.amount)) {
+                repository.buyAirtime(
+                    newAirtimeRequest.network,
+                    newAirtimeRequest.phone,
+                    newAirtimeRequest.amount
+                )) {
                 is Success -> {
                     withContext(Dispatchers.Main) {
-                        _result.value = UiText.DynamicString(result.data)
+                        _resultSharedFlow.emit(
+                            UiText.DynamicString(result.data)
+                        )
                     }
                 }
                 is Failure -> {
                     when (result.error) {
                         is HttpException -> {
                             withContext(Dispatchers.Main) {
-                                _result.value =
+                                _resultSharedFlow.emit(
                                     UiText.StringResource(resId = R.string.err_http_error)
+                                )
                             }
                         }
 
                         is UnknownHostException -> {
                             withContext(Dispatchers.Main) {
-                                _result.value =
+                                _resultSharedFlow.emit(
                                     UiText.StringResource(resId = R.string.err_check_internet_connection)
+                                )
                             }
                         }
 
                         is Exception -> {
                             withContext(Dispatchers.Main) {
-                                _result.value =
+                                _resultSharedFlow.emit(
                                     UiText.StringResource(resId = R.string.general_exception)
+                                )
                             }
                         }
                     }
