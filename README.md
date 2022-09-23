@@ -16,7 +16,9 @@ An app for purchasing Airtime and Data subscription at a cheaper price
 - Buy airtime and mobile internet data at a more cheapter price with this android application
 ## Technologies Used
 - [MVVM architecture + Repository pattern](https://developer.android.com/codelabs/basic-android-kotlin-training-repository-pattern#0)
-- [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
+- [Kotlin Flows](https://developer.android.com/kotlin/flow)
+- [Dagger-Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
+- [Jetpack DataStore](https://developer.android.com/topic/libraries/architecture/datastore)
 - [Android Jetpack Navigation](https://developer.android.com/guide/navigation)
 - [Retrofit for networking](https://square.github.io/retrofit/)
 - and more...
