@@ -1,7 +1,5 @@
 package com.ebenezer.gana.datacomm.ui.start
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ebenezer.gana.datacomm.R
@@ -11,6 +9,7 @@ import com.ebenezer.gana.datacomm.data.repository.PayTevRepository
 import com.ebenezer.gana.datacomm.utils.UiText
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.net.UnknownHostException
@@ -21,18 +20,24 @@ class StartFragmentViewModel @Inject constructor(
     private val repository: PayTevRepository
 ) : ViewModel() {
 
-    private val _balance = MutableLiveData<Double?>()
-    val balance: LiveData<Double?> = _balance
+    private val _balance = MutableStateFlow<Double?>(null)
+    val balance: StateFlow<Double?> = _balance
+        .stateIn(
+            initialValue = null,
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000)
+        )
 
-    private val _error = MutableLiveData<UiText>()
-    val error: LiveData<UiText> = _error
+    private val _error = MutableSharedFlow<UiText?>()
+    val error: SharedFlow<UiText?> = _error.asSharedFlow()
 
-    private val _greetingText = MutableLiveData<UiText>()
-    val greetingText: LiveData<UiText> = _greetingText
-
-    private val _isBalanceLoaded = MutableLiveData(false)
-    val isBalanceLoaded: LiveData<Boolean> = _isBalanceLoaded
-
+    private val _greetingText = MutableStateFlow<UiText?>(null)
+    val greetingText: StateFlow<UiText?> = _greetingText
+        .stateIn(
+            initialValue = null,
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000)
+        )
 
     /**
      * A function to set the Greeting's message according to the hour of the day
@@ -63,7 +68,7 @@ class StartFragmentViewModel @Inject constructor(
                 is Success -> {
                     withContext(Dispatchers.Main) {
                         _balance.value = result.data
-                        _isBalanceLoaded.value = true
+                        _error.emit(null)
 
                     }
                 }
@@ -71,14 +76,14 @@ class StartFragmentViewModel @Inject constructor(
                     when (result.error) {
                         is UnknownHostException -> {
                             withContext(Dispatchers.Main) {
-                                _error.value =
-                                    UiText.StringResource(resId = R.string.err_unable_to_load_balance)
+                                _error.emit(
+                                    UiText.StringResource(resId = R.string.err_unable_to_load_balance))
                             }
                         }
                         is Exception -> {
                             withContext(Dispatchers.Main) {
-                                _error.value =
-                                    UiText.StringResource(resId = R.string.general_exception)
+                                _error.emit(
+                                    UiText.StringResource(resId = R.string.general_exception))
                             }
                         }
 

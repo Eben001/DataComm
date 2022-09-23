@@ -7,13 +7,15 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.asLiveData
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.ebenezer.gana.datacomm.R
 import com.ebenezer.gana.datacomm.databinding.FragmentStartBinding
 import com.ebenezer.gana.datacomm.prefsStore.UserPreference
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
@@ -25,7 +27,7 @@ class StartFragment : Fragment() {
     private val viewModel: StartFragmentViewModel by viewModels()
 
     @Inject
-     lateinit var userPreference: UserPreference
+    lateinit var userPreference: UserPreference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,28 +46,50 @@ class StartFragment : Fragment() {
         setGreetingMessage(Calendar.getInstance().get(Calendar.HOUR_OF_DAY))
         setOnClickListeners()
     }
+
     private fun observeViewModels() {
         //Observe and save the user's balance in preferenceStore
-        viewModel.balance.observe(viewLifecycleOwner) { balance ->
-            lifecycleScope.launch {
-                balance?.let {
-                    userPreference.saveDataBalance(it)
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.balance.collectLatest { balance ->
+                        balance?.let {
+                            userPreference.saveDataBalance(it)
+                        }
+                        binding.swipeRefresh.isRefreshing = false
+                    }
                 }
-                binding.swipeRefresh.isRefreshing = false
+
+                launch {
+                    //observe and display greeting text
+                    viewModel.greetingText.collectLatest {
+                        binding.tvGreetings.text = it?.asString(requireContext())
+                    }
+                }
+                launch {
+                    //Observe and display balance from dataStore preference
+                    userPreference.dataBalance.collectLatest { balance ->
+                        binding.balance.text = resources.getString(R.string.balance, balance ?: 0.0)
+                    }
+                }
+                launch {
+                    viewModel.error
+                        .collect { message ->
+                            message?.let {
+                                Toast.makeText(
+                                    requireContext(),
+                                    it.asString(requireContext()),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                binding.swipeRefresh.isRefreshing = false
+                            }
+
+                        }
+                }
+
+
             }
         }
-
-        //Observe and display balance from dataStore preference
-        userPreference.dataBalance.asLiveData().observe(viewLifecycleOwner) { balance ->
-            binding.balance.text = resources.getString(R.string.balance, balance ?: 0.0)
-
-        }
-
-        //observe and display greeting text
-        viewModel.greetingText.observe(viewLifecycleOwner) {
-            binding.tvGreetings.text = it.asString(requireContext())
-        }
-
     }
 
 
@@ -83,32 +107,18 @@ class StartFragment : Fragment() {
         }
 
         binding.swipeRefresh.setOnRefreshListener {
-            lifecycleScope.launch {
-                viewModel.getBalance()
-                observeError()
-                binding.swipeRefresh.isRefreshing = true
-            }
-        }
-    }
-
-
-    private fun observeError() {
-        viewModel.error.observe(viewLifecycleOwner) { message ->
-            Toast.makeText(requireContext(), message.asString(requireContext()), Toast.LENGTH_SHORT)
-                .show()
-            binding.swipeRefresh.isRefreshing = false
+            viewModel.getBalance()
+            binding.swipeRefresh.isRefreshing = true
         }
     }
 
     override fun onStart() {
         super.onStart()
-        if (viewModel.isBalanceLoaded.value == false) {
             lifecycleScope.launch {
                 viewModel.getBalance()
-                observeError()
                 binding.swipeRefresh.isRefreshing = true
             }
-        }
+
     }
 
     override fun onDestroy() {
