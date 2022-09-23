@@ -47,9 +47,6 @@ PAYTEV_API_KEY = YOUR_API_KEY_HERE
 ## Project Status
 Project is: _in progress_ 
 
-To do:
-- Implement Kotlin Flows for Asynchronous streams
-
 ## Acknowledgements
 - This project was inspired when i visited [paytev.com](https://paytev.com) and discovered that they have an API. 
 I decided to build this application with it
