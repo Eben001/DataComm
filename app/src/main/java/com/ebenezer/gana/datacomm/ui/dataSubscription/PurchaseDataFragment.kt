@@ -9,10 +9,15 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.ebenezer.gana.datacomm.R
 import com.ebenezer.gana.datacomm.databinding.FragmentPurchaseDataBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class PurchaseDataFragment : Fragment() {
@@ -53,7 +58,12 @@ class PurchaseDataFragment : Fragment() {
                 binding.dataPlanSpinner.adapter = adapter
                 binding.dataPlanSpinner.onItemSelectedListener =
                     object : AdapterView.OnItemSelectedListener {
-                        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                        override fun onItemSelected(
+                            parent: AdapterView<*>?,
+                            view: View?,
+                            position: Int,
+                            id: Long
+                        ) {
 
                             when (binding.dataPlanSpinner.selectedItemPosition) {
                                 0 -> amountId = "M500MBS"
@@ -81,7 +91,12 @@ class PurchaseDataFragment : Fragment() {
                 binding.dataPlanSpinner.adapter = adapter
                 binding.dataPlanSpinner.onItemSelectedListener =
                     object : AdapterView.OnItemSelectedListener {
-                        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                        override fun onItemSelected(
+                            parent: AdapterView<*>?,
+                            view: View?,
+                            position: Int,
+                            id: Long
+                        ) {
                             when (binding.dataPlanSpinner.selectedItemPosition) {
                                 0 -> amountId = "M50MBG"
                                 1 -> amountId = "M500MBG"
@@ -107,7 +122,13 @@ class PurchaseDataFragment : Fragment() {
                 binding.dataPlanSpinner.adapter = adapter
 
                 binding.dataPlanSpinner.onItemSelectedListener =
-                    object : AdapterView.OnItemSelectedListener { override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    object : AdapterView.OnItemSelectedListener {
+                        override fun onItemSelected(
+                            parent: AdapterView<*>?,
+                            view: View?,
+                            position: Int,
+                            id: Long
+                        ) {
                             when (binding.dataPlanSpinner.selectedItemPosition) {
                                 0 -> amountId = "A100MB"
                                 1 -> amountId = "A300MB"
@@ -213,13 +234,19 @@ class PurchaseDataFragment : Fragment() {
 
 
     private fun observeViewModel() {
-        viewModel.result.observe(viewLifecycleOwner) {
-            clearTextEntries()
-            binding.tvResult.text = it.asString(requireContext())
-            enableViews()
-            binding.swipeRefresh.isRefreshing = false
-
+        lifecycleScope.launch {
+            viewModel.resultSharedFlow
+                .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                .collectLatest { result ->
+                    result?.let {
+                        clearTextEntries()
+                        binding.tvResult.text = it.asString(requireContext())
+                        enableViews()
+                        binding.swipeRefresh.isRefreshing = false
+                    }
+                }
         }
+
     }
 
     private fun clearTextEntries() {
